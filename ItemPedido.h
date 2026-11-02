@@ -1,21 +1,30 @@
 #pragma once
 #include <string>
+using namespace std;
 
-// Uma linha do pedido: copia nome e preco no momento da venda.
-// Assim uma venda antiga nao muda se o cardapio mudar depois.
 class ItemPedido {
 private:
-    int idProduto;
-    std::string nome;
+    int id;
+    string nome;
     int quantidade;
-    double precoUnitario;
+    float preco;
 public:
-    ItemPedido(int id = 0, std::string n = "", int q = 0, double p = 0)
-        : idProduto(id), nome(n), quantidade(q), precoUnitario(p) {}
-    int getIdProduto() const { return idProduto; }
-    std::string getNome() const { return nome; }
-    int getQuantidade() const { return quantidade; }
-    double getPrecoUnitario() const { return precoUnitario; }
-    double subtotal() const { return quantidade * precoUnitario; }
-    void setQuantidade(int q) { quantidade = q; }
+    ItemPedido(int i, string n, int q, float p) : id(i), nome(n), quantidade(q), preco(p) {}
+    int getId() const {
+         return id; }
+
+    string getNome() const {
+         return nome; }
+
+    int getQuantidade() const {
+         return quantidade; }
+
+    float getPreco() const {
+         return preco; }
+
+    void setQuantidade(int q) {
+         quantidade = q; }
+
+    float subtotal() const {
+         return quantidade * preco; }
 };

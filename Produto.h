@@ -1,52 +1,44 @@
 #pragma once
 #include <string>
-#include <iostream>
 #include "FichaProduto.h"
+using namespace std;
 
-// PRODUTO: SUPERCLASSE
-// Hamburguer e Bebida sao tipos especificos de Produto e herdam desta classe.
-// Os atributos ficam privados para proteger os dados (encapsulamento).
 class Produto {
 private:
-    int id;                    // Identificador unico do produto.
-    std::string nome;          // Nome usado na pesquisa.
-    float preco;               // Preco unitario.
-    std::string descricao;     // Descricao geral do item.
-    FichaProduto ficha;        // COMPOSICAO: Produto possui uma FichaProduto.
-    int estoque;               // Quantidade disponivel.
-
+    int id;
+    string nome;
+    float preco;
+    string descricao;
+    FichaProduto ficha;
 public:
-    // Construtor: recebe todos os dados comuns a qualquer produto.
-    // A lista depois de ":" inicializa os atributos antes do corpo do construtor.
-    Produto(int i, std::string n, float p, std::string des,
-            FichaProduto fic, int qtd = 0)
-        : id(i), nome(n), preco(p), descricao(des), ficha(fic), estoque(qtd) {}
+    Produto(int i, string n, float p, string des, FichaProduto fic) : id(i), nome(n), preco(p), descricao(des), ficha(fic) {}
+    int getId() const {
+         return id; }
 
-    // Destrutor virtual: importante porque os objetos derivados sao apagados
-    // por meio de ponteiros do tipo Produto*.
-    virtual ~Produto() {}
+    string getNome() const {
+         return nome; }
 
-    // GETTERS: permitem consultar os atributos privados.
-    int getId() const { return id; }
-    std::string getNome() const { return nome; }
-    float getPreco() const { return preco; }
-    std::string getDescricao() const { return descricao; }
-    FichaProduto getFicha() const { return ficha; }
-    int getEstoque() const { return estoque; }
+    float getPreco() const {
+         return preco; }
 
-    // SETTERS: permitem alterar os dados sem acessar os atributos diretamente.
-    void setNome(const std::string& n) { nome = n; }
-    void setPreco(float p) { preco = p; }
-    void setDescricao(const std::string& des) { descricao = des; }
-    void setFicha(const FichaProduto& fic) { ficha = fic; }
-    void setEstoque(int qtd) { estoque = qtd; }
+    string getDescricao() const {
+         return descricao; }
 
-    // METODO VIRTUAL PURO:
-    // A classe Produto nao define como os detalhes serao exibidos.
-    // Cada subclasse e obrigada a implementar sua propria versao.
+    FichaProduto getFicha() const {
+         return ficha; }
+
+    void setNome(string n) {
+         nome = n; }
+
+    void setPreco(float p) {
+         preco = p; }
+
+    void setDescricao(string des) {
+         descricao = des; }
+
     virtual void exibirDetalhes() const = 0;
-
-    // Retorna uma identificacao curta ("H" ou "B") para salvar o tipo no arquivo.
-    // Ao carregar, o sistema usa essa identificacao para recriar a subclasse correta.
-    virtual std::string getTipo() const = 0;
+    virtual char getTipo() const = 0;
+    virtual string getExtra() const = 0;
+    virtual ~Produto() {}
 };
+
